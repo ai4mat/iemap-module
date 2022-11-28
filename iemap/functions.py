@@ -8,7 +8,7 @@ from os.path import dirname, isfile
 import mimetypes
 import json
 from bson import ObjectId
-from helpers import get_file_size, endpoints
+from iemap.helpers import get_file_size, endpoints
 
 
 

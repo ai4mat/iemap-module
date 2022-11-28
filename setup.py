@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='iemap',                           # should match the package folder
     packages=['iemap'],                     # should match the package folder
-    version='0.2.2',                                # important for updates
+    version='0.2.3',                                # important for updates
     license='GPL',                                  # should match your chosen license
     description='Tools to use IEMAP Rest API',      # should match the package folder
     long_description=long_description,              # loads your README.md
