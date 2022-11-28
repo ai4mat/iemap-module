@@ -29,5 +29,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10',
     ],
     
-    download_url="",
+    download_url="https://github.com/ai4mat/iemap-module/archive/refs/tags/v0.1.0.tar.gz",
 )
