@@ -13,3 +13,17 @@ This module provides simple functions to interact with the iemap API.
     import iemap
     ```
 
+3. Create an instance of the `IEMAP` class, using your `user` and `password`:
+    ```python
+    api = iemap.IEMAP(user, password)
+    ```
+
+4. Use the `login()` method for API login:
+    ```python
+    api.login()
+    ```
+
+5. Use the `my_projects()` method to get a list of your projects:
+    ```python
+    api.my_projects()
+    ```
