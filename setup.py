@@ -22,14 +22,12 @@ setuptools.setup(
     keywords=["pypi", "iemap", "api"], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
         'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Documentation',
-        'License :: OSI Approved :: GNU General Public License (GPL)'
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Programming Language :: Python :: 3.10',
     ],
     
-    download_url="https://github.com/mike-huls/toolbox_public/archive/refs/tags/0.0.3.tar.gz",
+    download_url="",
 )
