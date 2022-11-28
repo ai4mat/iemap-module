@@ -18,7 +18,7 @@ setuptools.setup(
     project_urls = {                                # Optional
         "Bug Tracker": "https://github.com/ai4mat/iemap-module/issues"
     },
-    install_requires=['requests'],                  # list all packages that your package uses
+    install_requires=['requests', 'requests_toolbelt', 'bson'],                  # list all packages that your package uses
     keywords=["pypi", "iemap", "api"], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
         'Development Status :: 3 - Alpha',
