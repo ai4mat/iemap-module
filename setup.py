@@ -5,15 +5,15 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='iemap-module',                           # should match the package folder
-    packages=['iemap-module'],                     # should match the package folder
-    version='0.1.1',                                # important for updates
+    name='iemap',                           # should match the package folder
+    packages=['iemap'],                     # should match the package folder
+    version='0.1.2',                                # important for updates
     license='GPL',                                  # should match your chosen license
     description='Tools to use IEMAP Rest API',      # should match the package folder
     long_description=long_description,              # loads your README.md
     long_description_content_type="text/markdown",  # README.md is of type 'markdown'
-    author='Marco Puccini, Sergio Ferlito',
-    author_email='marco.puccini@enea.it, sergio.ferlito@enea.it',
+    author='Marco Puccini',
+    author_email='marco.puccini@enea.it',
     url='https://github.com/ai4mat/iemap-module', 
     project_urls = {                                # Optional
         "Homepage": "https://github.com/ai4mat/iemap-module",
@@ -34,5 +34,5 @@ setuptools.setup(
         "Topic :: Utilities"
     ],
     
-    download_url="https://github.com/ai4mat/iemap-module/archive/refs/tags/v0.1.1.tar.gz",
+    download_url="https://github.com/ai4mat/iemap-module/archive/refs/tags/v0.1.2.tar.gz",
 )
