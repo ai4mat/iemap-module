@@ -14,7 +14,7 @@ from helpers import get_file_size, endpoints
 
 
 
-class crudops:
+class IEMAP:
     # additional MIME_types
     mimetypes.types_map[".dat"] = "application/octet-stream"
     mimetypes.types_map[".out"] = "text/plain"
