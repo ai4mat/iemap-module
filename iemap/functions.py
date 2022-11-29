@@ -3,12 +3,15 @@ from io import open
 import time
 from functools import wraps
 from requests_toolbelt import MultipartEncoder
+from requests.exceptions import ConnectionError
 import requests
-from os.path import dirname, isfile
+from os.path import dirname
+from os import getcwd
 import mimetypes
 import json
 from bson import ObjectId
 from iemap.helpers import get_file_size, endpoints
+from iemap.models import newProject
 
 
 
