@@ -34,5 +34,5 @@ setuptools.setup(
         "Topic :: Utilities"
     ],
     
-    download_url="https://github.com/ai4mat/iemap-module/archive/refs/tags/v0.2.3.tar.gz",
+    download_url="https://github.com/ai4mat/iemap-module/archive/refs/tags/v0.3.0.tar.gz",
 )
