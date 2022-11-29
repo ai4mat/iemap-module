@@ -47,7 +47,7 @@ class IEMAP:
         if "~" in file_path:
             file_abspath = Path(file_path).expanduser()
         else:
-            file_abspath = Path(dirname(__file__)) / file_path
+            file_abspath = Path(getcwd()) / file_path
         return file_abspath
 
     def get_id(self):
