@@ -19,6 +19,7 @@ class IEMAP:
     mimetypes.types_map[".dat"] = "application/octet-stream"
     mimetypes.types_map[".out"] = "text/plain"
     mimetypes.types_map[".in"] = "text/plain"
+    mimetypes.types_map[".cif"] = "text/plain"  # "chemical/x-cif"  #
 
     def __init__(self, user, pwd):
         self.user = user
@@ -29,6 +30,22 @@ class IEMAP:
         self.metadata = None
         self.project_file = []
         self.property_file = None
+
+    def check_metadata(self):
+        try:
+            newProject(**self.metadata)
+            return False
+        except Exception as e:
+            print("The metadata provided does note have a valid schema.")
+            print("Please check the error details below:\n", e)
+            return True
+
+    def get_path_file(self, file_path):
+        if "~" in file_path:
+            file_abspath = Path(file_path).expanduser()
+        else:
+            file_abspath = Path(dirname(__file__)) / file_path
+        return file_abspath
 
     def get_id(self):
         if self.__id == None:
@@ -48,21 +65,7 @@ class IEMAP:
             )
 
     def get_token(self):
-        response = requests.post(
-            endpoints.get_token.value,
-            data=self.__payload,
-            # verify=False
-        )
-        if response.status_code == 200:
-            token = json.loads(response.text).get("access_token")
-            self.__token = token
-        else:
-            return f"An error occured!! Server response status code :{response.status_code}"
-
-    def login(self):
-        if self.__token != None:
-            print("User already logged in!")
-        else:
+        try:
             response = requests.post(
                 endpoints.get_token.value,
                 data=self.__payload,
@@ -71,9 +74,37 @@ class IEMAP:
             if response.status_code == 200:
                 token = json.loads(response.text).get("access_token")
                 self.__token = token
-                print("User successfully logged in!")
+
             else:
-                return f"An error occured!! Server response status code :{response.status_code}"
+                print(
+                    f"An error occured!! Server response status code :{response.status_code}"
+                )
+                return False
+        except ConnectionError as e:
+            print("Unable to connect to server. Check your connectivity and try again.")
+            return False
+        return True
+
+    def login(self):
+        if self.__token != None:
+            print("User already logged in!")
+        else:
+            try:
+                response = requests.post(
+                    endpoints.get_token.value,
+                    data=self.__payload,
+                    # verify=False
+                )
+                if response.status_code == 200:
+                    token = json.loads(response.text).get("access_token")
+                    self.__token = token
+                    print("User successfully logged in!")
+                else:
+                    return f"An error occured!! Server response status code :{response.status_code}"
+            except ConnectionError as e:
+                print(
+                    "Can't Login, unable to connect to server! Check your connectivity and try again."
+                )
 
     def show_token(self):
         print("Current token value is:\n" + self.__token)
@@ -93,10 +124,13 @@ class IEMAP:
                 msg = "Saving metadata (and files)"
             if func.__name__ == "save_project_files":
                 msg = "Saving project file"
-            print(
-                f"{msg} took {total_time:.4f} seconds"
-                # f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
-            )
+            if func.__name__ == "download_file":
+                msg = "Download"
+            if result != None:
+                print(
+                    f"{msg} took {total_time:.4f} seconds"
+                    # f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
+                )
             return result
 
         return timeit_wrapper
@@ -104,30 +138,43 @@ class IEMAP:
     def save(self, metadata, list_proj_files=[], show_debug_info=False):
         if type(metadata) == dict:
             self.metadata = metadata
-        elif isfile(metadata):
-            with open(metadata, "r", encoding="utf-8") as f:
+        elif self.get_path_file(metadata).is_file():
+            with open(self.get_path_file(metadata), "r", encoding="utf-8") as f:
                 metadata_from_file = f.read()
             self.metadata = json.loads(metadata_from_file)
-
-        if self.__token == None:
-            self.get_token()
-        response = requests.post(
-            endpoints.post_metadata.value,
-            json=self.metadata,
-            headers={"Authorization": f"Bearer {self.__token}"},
-            # verify=False,
-        )
-        if response.status_code == 200:
-            self.__id = json.loads(response.text).get("inserted_id")
-            print(f"Document correctly inserted with ObjectID={self.__id}")
-            if list_proj_files != []:
-                self.save_project_files(list_proj_files)
         else:
-            print(
-                f"Unable to save data on DB!! Server response status code :{response.status_code}"
+            print("Unable to read metadata!! Check the path of the provided file.")
+            print("Provided file path file is ", metadata)
+            print("Current working directory is: ", getcwd())
+            print("Current file path is:    ", __file__)
+            return
+        # if metadata does not hav a valid schema then exit method
+        if self.check_metadata():
+            return
+        isAuthenticated = False
+        if self.__token == None:
+            isAuthenticated = self.get_token()
+            if not isAuthenticated:
+                return
+        try:
+            response = requests.post(
+                endpoints.post_metadata.value,
+                json=self.metadata,
+                headers={"Authorization": f"Bearer {self.__token}"},
             )
-            if show_debug_info:
-                print(response.text)
+            if response.status_code == 200:
+                self.__id = json.loads(response.text).get("inserted_id")
+                print(f"Document correctly inserted with ObjectID = {self.__id}")
+                if list_proj_files != []:
+                    self.save_project_files(list_proj_files)
+            else:
+                print(
+                    f"Unable to save data on DB!! Server response status code :{response.status_code}"
+                )
+                if show_debug_info:
+                    print(response.text)
+        except Exception as e:
+            print("An error occurred! ", e)
 
     def upload_file(
         self,
@@ -150,36 +197,42 @@ class IEMAP:
             self.get_token()
         # endpoint to save data use query parameters (project_id obtained after saving metadata)
         # ep = endpoints.post_project_file.value + "?project_id=" + str(self.__id)
-        response_f = requests.post(
-            endpoint,
-            data=m,
-            headers={
-                "Content-Type": m.content_type,
-                "Authorization": f"Bearer {self.__token}",
-            },
-            # verify=False,
-        )
-        if response_f.status_code == 200:
-            print(f"Done!")
-        else:
-            print(f"Error! ...file not saved.")
-            if show_debug_info:
-                print(response_f.text)
+        try:
+            response_f = requests.post(
+                endpoint,
+                data=m,
+                headers={
+                    "Content-Type": m.content_type,
+                    "Authorization": f"Bearer {self.__token}",
+                },
+            )
+            if response_f.status_code == 200:
+                if json.loads(response_f.text)["uploaded"]:
+                    print(f"Done!")
+                else:
+                    print(f"Done! (File already present on File System)")
+            else:
+                print(f"Error! ...file not saved.")
+                if show_debug_info:
+                    print(response_f.text)
+            return True
+        except ConnectionError as e:
+            print(
+                f"Error while uploading file {file_name}! unable to connect to server."
+            )
+        except Exception as e:
+            print(f"Error while uploading file {file_name}! Error:\n", e)
 
     @timeit
     def save_project_files(self, project_files, show_debug_info=False):
         if self.__id == None:
             print(
-                "No project id is currently set. Unable to save files!\nPlease Provide a valid id (e.g. using `set_id`)"
+                """No project id is currently set. Unable to save files!
+Please Provide a valid id (e.g. using `set_id`)"""
             )
             return
         for f in project_files:
-            if "~" in f:
-                file_abspath = Path(f).expanduser()
-            else:
-                file_abspath = Path(dirname(__file__)) / f
-
-            # multiencoder to upload files (one at time)
+            file_abspath = self.get_path_file(f)
             if file_abspath.is_file() == True:
                 # open file as stream
                 file_to_upload = open(file_abspath, "rb")
@@ -193,6 +246,7 @@ class IEMAP:
                 )
             else:
                 print(f"{f} IS NOT A VALID PATH FILE!")
+        return True
 
     def save_property_files(self, props_files, show_debug_info=False):
         if self.__id == None:
@@ -232,30 +286,81 @@ class IEMAP:
     def query(self, doc_id):
         ep = endpoints.get_query_db.value + "?id=" + str(doc_id)
         # "?iemap_id=" + str(iemap_id) e.g ?iemap_id=iemap-6EB98D
-        response = requests.get(
-            ep,
-            # verify=False
-            # headers={"Authorization": f"Bearer {self.__token}"},
-        )
-        if response.status_code == 200:
-            docs = json.loads(response.text)
-            return docs
-            # print(json.dumps(doc, indent=2))
-        else:
-            print(f"Unable to find a document with iemap_id={doc_id} on DB!!")
+        try:
+            response = requests.get(
+                ep,
+                # verify=False
+                # headers={"Authorization": f"Bearer {self.__token}"},
+            )
+            if response.status_code == 200:
+                docs = json.loads(response.text)
+                return docs
+            else:
+                print(f"Unable to find a document with iemap_id={doc_id} on DB!!")
+        except ConnectionError as e:
+            print("Error while querying DataBase! Unable to contact server!")
+        except Exception as e:
+            print("Error while querying DataBase!\nError: ", e)
 
     def my_projects(self):
         if self.__token == None:
             self.get_token()
-        ep = endpoints.get_user_projects_info.value
-        response = requests.get(
-            ep,
-            headers={"Authorization": f"Bearer {self.__token}"},
-            # verify=False
-        )
-        if response.status_code == 200:
-            docs = json.loads(response.content)
-            # print(json.dumps(doc, indent=2))
-            return docs
-        else:
-            print(f"An error occurred!")
+        try:
+            ep = endpoints.get_user_projects_info.value
+            response = requests.get(
+                ep,
+                headers={"Authorization": f"Bearer {self.__token}"},
+            )
+            if response.status_code == 200:
+                docs = json.loads(response.content)
+                return docs
+            else:
+                print(f"An error occurred!")
+        except ConnectionError as e:
+            print(
+                "Error while trying to get list user's projects! Unable to contact server!"
+            )
+        except Exception as e:
+            print("Error while trying to get list user's projects!\nError: ", e)
+
+    @timeit
+    def download_file(self, hash_file, local_file_name=None):
+        if self.__token == None:
+            self.get_token()
+        ep = endpoints.get_file.value + "/" + hash_file
+        print("Download started, please wait....", end="")
+        try:
+            response = requests.get(
+                ep,
+                headers={"Authorization": f"Bearer {self.__token}"},
+                allow_redirects=True,
+            )
+            if response.status_code == 200:
+                mtype = response.headers.get("content-type")
+                filename = (
+                    f"./{hash_file}" if local_file_name == None else local_file_name
+                )
+                open(filename, "wb").write(response.content)
+                print("Done!")
+            else:
+                print("The requested file is not available on server!")
+        except Exception as e:
+            print("Error downloading file! Error: ", e)
+
+    def delete_project_file(self, hash_file):
+        if self.__token == None:
+            self.get_token()
+        ep = endpoints.delete_project_file.value + hash_file
+        try:
+            print(f"Deleting file {hash_file}")
+            response = requests.delete(
+                ep,
+                headers={"Authorization": f"Bearer {self.__token}"},
+                allow_redirects=True,
+            )
+            if response.status_code == 200:
+                print(json.loads(response.text)["status"])
+            else:
+                print("The requested file is not available on server!")
+        except Exception as e:
+            print("Error downloading file! Error: ", e)

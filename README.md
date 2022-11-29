@@ -10,12 +10,12 @@ This module provides simple functions to interact with the iemap API.
 
 2. In your script or notebook, import the module:
     ```python
-    import iemap
+    from iemap import IEMAP
     ```
 
 3. Create an instance of the `IEMAP` class, using your `user` and `password`:
     ```python
-    api = iemap.IEMAP(user, password)
+    api = IEMAP(user, password)
     ```
 
 4. Use the `login()` method for API login:
