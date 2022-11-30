@@ -42,3 +42,5 @@ class endpoints(Enum):
     post_property_file = f"{base_url}/api/v1/project/add/file_property/"
     get_query_db = f"{base_url}/api/v1/project/query/"
     get_user_projects_info = f"{base_url}/api/v1/user/projects/info"
+    get_file = f"{base_url}/file"
+    delete_project_file = f"{base_url}/api/v1/project/add/file/"

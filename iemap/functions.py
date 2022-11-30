@@ -258,10 +258,7 @@ Please Provide a valid id (e.g. using `set_id`)"""
             )
             return
         for prop, file in props_files.items():
-            if "~" in file:
-                file_abspath = Path(file).expanduser()
-            else:
-                file_abspath = Path(dirname(__file__)) / file
+            file_abspath= self.get_path_file(file)
 
             mtype, encoding = mimetypes.guess_type(Path(file))
 

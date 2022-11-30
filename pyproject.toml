@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "iemap"
-version = "0.3.2"
+version = "0.3.3"
 authors = [
     { name="Sergio Ferlito", email="sergio.ferlito@enea.it" },
-    { name="marco.puccini", email="marco.puccini@enea.it" }
+    { name="Marco Puccini", email="marco.puccini@enea.it" }
 ]
 maintainers = [
     { name = "Marco Puccini", email = "marco.puccini@enea.it" }
