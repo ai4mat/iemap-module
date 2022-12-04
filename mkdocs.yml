@@ -1,5 +1,16 @@
 site_name: IEMAP Module
+site_url: https://pypi.org/project/iemap/
+repo_url: https://github.com/ai4mat/iemap-module
+nav:
+  - Home: index.md
+  - Methods: methods.md
+  # - Installation: installation.md
+  # - Usage: usage.md
+  # - API: api.md
+  # - Examples: examples.md
+  # - Contributing: contributing.md
+  # - License: license.md
 theme: 
   name: material
   palette:
-    primary: amber
+    primary: light green
