@@ -1,6 +1,6 @@
 # IEMAP Module
 
-This module provides simple functions to interact with the iemap API. The python package is available on [PyPI](https://pypi.org/project/iemap/).
+This module provides a set of simple methods to interact with the [iemap API](https://github.com/ai4mat/iemap-api). The python package is available on [PyPI](https://pypi.org/project/iemap/).
 
 ## Quickstart
 1. Create a virtual environment and install the module in it:
