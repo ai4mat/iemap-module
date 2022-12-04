@@ -282,7 +282,20 @@
 
 
 <h1 id="full-list-of-iemap-methods">Full list of IEMAP methods</h1>
-<p><code>check_metadata(self)</code>: Check metadata schema for validation.</p>
+<p><code>check_metadata()</code>: Check metadata schema for validation.</p>
+<p><code>get_id()</code> : Get the id of the current object.</p>
+<p><code>set_id(id)</code> : Set the id of the current object.</p>
+<p><code>get_token()</code> : Get the token of the current object.</p>
+<p><code>login()</code> : Login to the server.</p>
+<p><code>show_token()</code>: Show the token of the current object.</p>
+<p><code>_load_metadata(file_path)</code>: Load metadata from a file.</p>
+<p><code>save(metadata, list_proj_files=[], show_debug_info=False)</code>: Save the current object to the server.</p>
+<p><code>save_project_files(project_files, show_debug_info=False)</code>: Save project files to the server.</p>
+<p><code>save_property_files(props_files, show_debug_info=False)</code>: Save property files to the server.</p>
+<p><code>query(doc_id)</code>: Query the server for a document.</p>
+<p><code>my_projects()</code>: Get the list of projects owned by the current user.</p>
+<p><code>download_file(hash_file, local_file_name=None)</code> : Download a file from the server.</p>
+<p><code>delete_project_file(hash_file)</code>: Delete a project file from the server.</p>
 
 
 
