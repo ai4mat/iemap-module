@@ -1,0 +1,5 @@
+site_name: IEMAP Module
+theme: 
+  name: material
+  palette:
+    primary: amber
