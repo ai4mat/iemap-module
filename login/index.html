@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://pypi.org/project/iemap/methods/">
+        <link rel="canonical" href="https://pypi.org/project/iemap/login/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Methods - IEMAP Module</title>
+        <title>Login - IEMAP Module</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#full-list-of-iemap-module-methods" class="md-skip">
+        <a href="#how-to-login-using-the-iemap-module" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Methods
+              Login
             
           </span>
         </div>
@@ -224,11 +224,52 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../login/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Login
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Login
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-login" class="md-nav__link">
+    Check your login
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -254,21 +295,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../methods/" class="md-nav__link">
         Methods
       </a>
-      
     </li>
   
 
@@ -308,6 +339,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-login" class="md-nav__link">
+    Check your login
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -320,27 +366,28 @@
                 
                   
 
-  <a href="https://github.com/ai4mat/iemap-module/edit/master/docs/methods.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/ai4mat/iemap-module/edit/master/docs/login.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="full-list-of-iemap-module-methods">Full list of IEMAP module methods</h1>
-<p><code>check_metadata()</code>: Check metadata schema for validation.</p>
-<p><code>get_id()</code> : Get the id of the current object.</p>
-<p><code>set_id(id)</code> : Set the id of the current object.</p>
-<p><code>get_token()</code> : Get the token of the current object.</p>
-<p><code>login()</code> : Login to the server.</p>
-<p><code>show_token()</code>: Show the token of the current object.</p>
-<p><code>_load_metadata(file_path)</code>: Load metadata from a file.</p>
-<p><code>save(metadata, list_proj_files=[], show_debug_info=False)</code>: Save the current object to the server.</p>
-<p><code>save_project_files(project_files, show_debug_info=False)</code>: Save project files to the server.</p>
-<p><code>save_property_files(props_files, show_debug_info=False)</code>: Save property files to the server.</p>
-<p><code>query(doc_id)</code>: Query the server for a document.</p>
-<p><code>my_projects()</code>: Get the list of projects owned by the current user.</p>
-<p><code>download_file(hash_file, local_file_name=None)</code> : Download a file from the server.</p>
-<p><code>delete_project_file(hash_file)</code>: Delete a project file from the server.</p>
+<h1 id="how-to-login-using-the-iemap-module">How to login using the IEMAP module</h1>
+<p>After the IEMAP module has been installed ed imported, you can use it to login just by defining the <code>user</code> and <code>password</code> variables:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">user</span> <span class="o">=</span> <span class="s2">&quot;your_user&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;your_password&quot;</span>
+</code></pre></div>
+<p>Then you can use them to create an instance of the <code>IEMAP</code> class:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">api</span> <span class="o">=</span> <span class="n">IEMAP</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+</code></pre></div>
+Finally, you can use the <code>login()</code> method to login to the server:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">api</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="check-your-login">Check your login</h2>
+<p>You can check if the login has been worked by using the <code>get_token()</code> method:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">api</span><span class="o">.</span><span class="n">get_token</span><span class="p">()</span>
+</code></pre></div>
+If the login has been successful, you'll get <code>True</code> as response. Otherwise, an error will be raised.</p>
 
 
 
@@ -361,7 +408,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../save_metadata/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Save metadata" rel="prev">
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -370,20 +417,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Save metadata
+              Home
             </div>
           </div>
         </a>
       
       
         
-        <a href="../license/" class="md-footer__link md-footer__link--next" aria-label="Next: License" rel="next">
+        <a href="../save_metadata/" class="md-footer__link md-footer__link--next" aria-label="Next: Save metadata" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              License
+              Save metadata
             </div>
           </div>
           <div class="md-footer__button md-icon">

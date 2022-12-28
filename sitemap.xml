@@ -6,7 +6,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://pypi.org/project/iemap/license/</loc>
+         <lastmod>2022-12-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pypi.org/project/iemap/login/</loc>
+         <lastmod>2022-12-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://pypi.org/project/iemap/methods/</loc>
+         <lastmod>2022-12-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pypi.org/project/iemap/save_metadata/</loc>
          <lastmod>2022-12-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
