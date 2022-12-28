@@ -32,3 +32,5 @@ This module provides a set of simple methods to interact with the [iemap API](ht
     ```python
     api.my_projects()
     ```
+
+The complete list of methods is available at the dedicated section.

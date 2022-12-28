@@ -1,4 +1,4 @@
-# Full list of IEMAP methods
+# Full list of IEMAP module methods
 
 `check_metadata()`: Check metadata schema for validation.
 

@@ -3,14 +3,22 @@ site_url: https://pypi.org/project/iemap/
 repo_url: https://github.com/ai4mat/iemap-module
 nav:
   - Home: index.md
+  - Login: login.md
+  - Save metadata: save_metadata.md
   - Methods: methods.md
   # - Installation: installation.md
   # - Usage: usage.md
   # - API: api.md
   # - Examples: examples.md
   # - Contributing: contributing.md
-  # - License: license.md
+  - License: license.md
 theme: 
   name: material
   palette:
     primary: light green
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

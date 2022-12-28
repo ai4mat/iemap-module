@@ -2,6 +2,9 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+exclude = ["site"]
+
 [project]
 name = "iemap"
 version = "0.3.5"
@@ -36,7 +39,6 @@ dependencies = [
     "bson==0.5.10",
     "pydantic==1.10.2"
 ]
-
 [project.urls]
 "Homepage" = "https://github.com/ai4mat/iemap-module"
 "Bug Tracker" = "https://github.com/ai4mat/iemap-module/issues"
