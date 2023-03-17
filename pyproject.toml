@@ -7,7 +7,7 @@ exclude = ["site"]
 
 [project]
 name = "iemap"
-version = "0.3.5"
+version = "0.3.6"
 authors = [
     { name="Sergio Ferlito", email="sergio.ferlito@enea.it" },
     { name="Marco Puccini", email="marco.puccini@enea.it" }
