@@ -34,7 +34,7 @@ def get_file_size(file_path, size_type=SIZE_UNIT.BYTES):
 
 # Enum for each endpoint
 class endpoints(Enum):
-    base_url = "https://iemap.enea.it"
+    base_url = "https://iemap.enea.it/rest"
     get_token = f"{base_url}/auth/jwt/login"
     check_auth = f"{base_url}v1/health/checkauth"
     post_metadata = f"{base_url}/api/v1/project/add"
